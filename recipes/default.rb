@@ -49,6 +49,10 @@ end
 
 template '/etc/filebeat/filebeat.yml' do
   source 'filebeat.yml'
-  variables proxy_port: Filebeat['filebeat']['ELK_PrivateIP']
+  variables ELK_PrivateIP: node['filebeat']['ELK_PrivateIP']
   notifies :restart, 'service[filebeat]'
+end
+
+execute 'update filebeat' do
+  command 'update-rc.d filebeat defaults 95 10'
 end

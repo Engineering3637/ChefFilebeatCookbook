@@ -28,6 +28,10 @@ describe 'Filebeat::default' do
       expect(chef_run).to enable_service "filebeat"
     end
 
+    it 'should add filebeath to source list' do
+      expect(chef_run).to add_apt_repository('filebeat')
+    end
+
     it "should start filebeat service" do
       expect(chef_run).to start_service "filebeat"
     end
@@ -36,7 +40,17 @@ describe 'Filebeat::default' do
       expect(chef_run).to create_template('/etc/filebeat/filebeat.yml').with_variables(ELK_PrivateIP: "192.168.3.10")
     end
 
+    it 'creates a directory /etc/pki/' do
+      expect(chef_run).to create_directory('/etc/pki/')
+    end
 
+    it 'creates a directory /etc/pki/tls/' do
+      expect(chef_run).to create_directory('/etc/pki/tls/')
+    end
+
+    it 'creates a directory /etc/pki/tls/certs' do
+      expect(chef_run).to create_directory('/etc/pki/tls/certs')
+    end
 
   end
 
