@@ -1,4 +1,3 @@
-#
 # Cookbook:: Filebeat
 # Recipe:: default
 #
@@ -10,6 +9,7 @@ end
 
 execute 'Move certificate and install filebeats' do
   command 'mkdir -p /etc/pki/tls/certs'
+  command 'mkdir /etc/pki/tls/private'
   command 'sudo cp /tmp/logstash-forwarder.crt /etc/pki/tls/certs/'
   command 'echo "deb https://packages.elastic.co/beats/apt stable main" |  sudo tee -a /etc/apt/sources.list.d/beats.list'
   command 'wget -qO - https://packages.elastic.co/GPG-KEY-elasticsearch | sudo apt-key add -'
@@ -23,5 +23,5 @@ end
 
 execute 'Restart filebeat' do
   command 'sudo service filebeat restart'
-  command 'sudo update-rc.d filebeat defaults 95 10'
+  command 'sudo +-rc.d filebeat defaults 95 10'
 end
