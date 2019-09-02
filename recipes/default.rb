@@ -26,5 +26,5 @@ end
 
 execute 'Restart filebeat' do
   command 'sudo service filebeat restart'
-  command 'sudo +-rc.d filebeat defaults 95 10'
+  command 'sudo update-rc.d filebeat defaults 95 10'
 end
