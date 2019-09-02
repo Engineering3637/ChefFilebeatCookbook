@@ -3,6 +3,8 @@
 #
 # Copyright:: 2019, The Authors, All Rights Reserved.
 
+
+filebeat_install 'default'
 template '/tmp/logstash-forwarder.crt' do
   source 'logstash-forwarder.crt.erb'
 end
@@ -17,8 +19,6 @@ execute 'Move certificate and install filebeats' do
   # command 'sudo apt-get update'
   # command 'sudo apt-get install filebeat'
 end
-
-filebeat_install 'default'
 
 template '/etc/filebeat/filebeat.yml' do
   source 'filebeat.yml.erb'
