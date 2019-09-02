@@ -14,7 +14,7 @@ execute 'Move certificate and install filebeats' do
   command 'echo "deb https://packages.elastic.co/beats/apt stable main" |  sudo tee -a /etc/apt/sources.list.d/beats.list'
   command 'wget -qO - https://packages.elastic.co/GPG-KEY-elasticsearch | sudo apt-key add -'
   command 'sudo apt-get update'
-  command 'sudo apt-get install filebeat'
+  command 'sudo apt-get install filebeat -y'
 end
 
 template '/etc/filebeat/filebeat.yml' do
