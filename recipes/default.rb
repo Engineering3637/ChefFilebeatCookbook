@@ -4,55 +4,24 @@
 #
 # Copyright:: 2019, The Authors, All Rights Reserved.
 
-
-# COPY SSL CERTIFICATE
-
-directory '/etc/pki/' do
-  owner 'root'
-  group 'root'
-  mode '0755'
-  action :create
+template '/tmp/logstash-forwarder.crt' do
+  source 'logstash-forwarder.crt.erb'
 end
 
-directory '/etc/pki/tls/' do
-  owner 'root'
-  group 'root'
-  mode '0755'
-  action :create
+execute 'Move certificate and install filebeats' do
+  command 'sudo mkdir -p /etc/pki/tls/certs'
+  command 'sudo cp /tmp/logstash-forwarder.crt /etc/pki/tls/certs/'
+  command 'echo "deb https://packages.elastic.co/beats/apt stable main" |  sudo tee -a /etc/apt/sources.list.d/beats.list'
+  command 'wget -qO - https://packages.elastic.co/GPG-KEY-elasticsearch | sudo apt-key add -'
+  command 'sudo apt-get update'
+  command 'sudo apt-get install filebeat'
 end
-
-directory '/etc/pki/tls/certs' do
-  owner 'root'
-  group 'root'
-  mode '0755'
-  action :create
-end
-
-
-apt_repository 'filebeat' do
-  uri 'https://packages.elastic.co/beats/apt stable main'
-  key 'https://packages.elastic.co/GPG-KEY-elasticsearch'
-  trusted false
-  components ['filebeat']
-end
-
-apt_update 'update_sources' do
-  action :update
-end
-
-package 'filebeat'
-
-service 'filebeat' do
-  action [:enable, :start]
-end
-
 
 template '/etc/filebeat/filebeat.yml' do
-  source 'filebeat.yml'
-  variables ELK_PrivateIP: node['filebeat']['ELK_PrivateIP']
-  notifies :restart, 'service[filebeat]'
+  source 'filebeat.yml.erb'
 end
 
-execute 'update filebeat' do
-  command 'update-rc.d filebeat defaults 95 10'
+execute 'Restart filebeat' do
+  command 'sudo service filebeat restart'
+  command 'sudo update-rc.d filebeat defaults 95 10'
 end

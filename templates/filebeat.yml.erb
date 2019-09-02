@@ -279,7 +279,7 @@ output:
   # ### Logstash as output
   logstash:
     # The Logstash hosts
-    hosts: [<%= @ELK_PrivateIP %>:5044]
+    hosts: ["10.0.111.143:5044"]
     bulk_max_size: 1024
     # Number of workers per Logstash host.
     #worker: 1

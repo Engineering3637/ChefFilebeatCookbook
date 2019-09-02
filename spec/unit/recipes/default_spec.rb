@@ -28,7 +28,7 @@ describe 'Filebeat::default' do
       expect(chef_run).to enable_service "filebeat"
     end
 
-    it 'should add filebeath to source list' do
+    it 'should add filebeat to source list' do
       expect(chef_run).to add_apt_repository('filebeat')
     end
 
