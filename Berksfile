@@ -1,3 +1,3 @@
 source 'https://supermarket.chef.io'
 
-cookbook 'filebeat', '~> 2.2.0'
+cookbook 'filebeat', '~> 0.3.6'

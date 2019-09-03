@@ -2,7 +2,8 @@
 # Recipe:: default
 #
 # Copyright:: 2019, The Authors, All Rights Reserved.
-filebeat_install 'default'
+include_recipe 'filebeat::default'
+include_recipe 'filebeat::install_package'
 
 template '/tmp/logstash-forwarder.crt' do
   source 'logstash-forwarder.crt.erb'
