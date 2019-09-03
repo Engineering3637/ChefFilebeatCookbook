@@ -3,8 +3,6 @@
 #
 # Copyright:: 2019, The Authors, All Rights Reserved.
 filebeat_install 'default'
-filebeat_runit_service 'default'
-
 
 template '/tmp/logstash-forwarder.crt' do
   source 'logstash-forwarder.crt.erb'
