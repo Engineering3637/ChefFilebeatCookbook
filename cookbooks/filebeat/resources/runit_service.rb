@@ -18,7 +18,7 @@ action :create do
   install_preview_resource = check_beat_resource(Chef.run_context, :filebeat_install_preview, new_resource.filebeat_install_resource_name)
   install_resource = check_beat_resource(Chef.run_context, :filebeat_install, new_resource.filebeat_install_resource_name)
   filebeat_install_resource = install_preview_resource || install_resource
-  raise "could not find resource filebeat_install[#{filebeat_install_resource_name}] or filebeat_install_preview[#{filebeat_install_resource_name}]" if filebeat_install_resource.nil?
+  raise "could not find resource filebeat_install[#{new_resource.filebeat_install_resource_name}] or filebeat_install_preview[#{new_resource.filebeat_install_resource_name}]" if filebeat_install_resource.nil?
 
   conf_file = default_conf_file(filebeat_install_resource.conf_dir)
 
@@ -56,6 +56,7 @@ action :create do
     default_logger true
     action service_action
     ignore_failure new_resource.service_ignore_failure
+    run_template_name 'filebeat' # use sv-filebeat-run.erb as the run file
     cookbook 'filebeat'
   end
 end
