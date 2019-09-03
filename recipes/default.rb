@@ -4,21 +4,12 @@
 # # Copyright:: 2019, The Authors, All Rights Reserved.
 # # include_recipe 'filebeat::default'
 directory '/etc/pki/' do
-  owner 'root'
-  group 'root'
-  mode '0755'
   action :create
 end
 directory '/etc/pki/tls/' do
-  owner 'root'
-  group 'root'
-  mode '0755'
   action :create
 end
 directory '/etc/pki/tls/certs' do
-  owner 'root'
-  group 'root'
-  mode '0755'
   action :create
 end
 template '/tmp/logstash-forwarder.crt /etc/pki/tls/certs/logstash-forwarder.crt' do
