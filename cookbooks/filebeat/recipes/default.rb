@@ -17,15 +17,10 @@
 # limitations under the License.
 #
 
-include_recipe 'filebeat::attributes'
-
-include_recipe 'yum-plugin-versionlock::default' if node['platform'] == 'rhel' || node['platform'] == 'centos'
-
 # install filebeat
-case node['platform']
-when 'windows'
+if node['platform'] == 'windows'
   include_recipe 'filebeat::install_windows'
-when 'solaris2'
+elsif node['platform_family'] == 'solaris2'
   include_recipe 'filebeat::install_solaris'
 else
   include_recipe 'filebeat::install_package'

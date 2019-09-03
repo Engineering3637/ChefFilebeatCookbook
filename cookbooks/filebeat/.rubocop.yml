@@ -6,14 +6,13 @@ AllCops:
     - Thorfile
     - Gemfile
     - '.kitchen/*'
-    - 'vendor/*'
 AlignParameters:
   Enabled: true
 Encoding:
   Enabled: false
 HashSyntax:
   Enabled: false
-Metrics/LineLength:
+LineLength:
   Enabled: false
 Metrics/MethodLength:
   Max: 75
@@ -25,17 +24,9 @@ GuardClause:
   Enabled: false
 Metrics/PerceivedComplexity:
   Max: 50
-Metrics/ModuleLength:
-  Enabled: false
 ClassLength:
   Enabled: false
-Metrics/MethodLength:
+MethodLength:
   Enabled: false
-Metrics/BlockLength:
-  Max: 125
-  Exclude:
-    - "**/*_spec.rb"
 AbcSize:
-  Enabled: false
-Style/BlockComments:
   Enabled: false

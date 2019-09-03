@@ -10,9 +10,6 @@ nohup.out
 ehthumbs.db
 Thumbs.db
 
-.kitchen/
-.kitchen.local.yml
-
 # SASS #
 ########
 .sass-cache
@@ -109,4 +106,5 @@ Gemfile.lock
 # Data Bag Sample Files
 databag/
 
-.ignore/
+# Icinga2 LWRP examples
+examples/
